@@ -8,8 +8,11 @@
                 <span>+ Tambah</span>
             </a>
         </div>
+        <form action="{{ route('product.cari') }}" method="GET">
+    <input type="text" name="search" placeholder="Cari product..." value="{{ request('search') }}">
+    <button type="submit">Search</button>
+</form>
         <table class="table table-responsive table-hover table-stripped">
-        <caption>daftar produk</caption>
         <thead>
             <tr>
                 <th>No</th>

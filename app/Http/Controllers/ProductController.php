@@ -14,6 +14,25 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+     function cari(Request $request)
+    {
+        $search = $request->input('search');
+
+        $products = Product::where('name', 'LIKE', "%{$search}%")->get();
+
+        if ($products->isEmpty()) {
+        return view('products.cari', [
+            'products' => $products,
+            'search' => $search,
+            'error' => "Produk dengan kata kunci '{$search}' tidak ditemukan."
+        ]);
+    }
+        return view('products.cari', [
+            'products' => $products,
+            'search'   => $search
+        ]);
+    }
+
      function add() {
         return view('products.add');
     }
