@@ -20,12 +20,6 @@
 </head>
 <body>
   {{-- navbar --}}
-  MariaDB [(none)]> CREATE DATABASE laravel_db;
-MariaDB [(none)]> CREATE USER 'laravel_user'@'localhost' IDENTIFIED BY 'Str0ngPa$$word
-MariaDB [(none)]> GRANT ALL ON laravel_db.* TO 'laravel_user'@'localhost';
-MariaDB [(none)]> FLUSH PRIVILEGES;
-MariaDB [(none)]> EXIT
-  
 {{-- end navbar --}}
 {{-- isi --}}
 <div class="barang">
