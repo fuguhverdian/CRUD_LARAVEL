@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -40,13 +41,22 @@ class ProductController extends Controller
     function save(Request $request) {
         $request->validate([
             'name' => 'required|string',
-            'description'  => 'required|string'
+            'description'  => 'required|string',
+            'image' => 'image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
+
 
         $product = new Product();
         $product->name = $request->input('name');
         $product->description = $request->input('description');
-        $product->image = $request->input('image');
+        
+        // save a imgae
+        
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $product->image = $path;
+        }
+
         $product->save();
 
         return redirect('/')->with('success', 'Produk berhasil disimpan.');
@@ -61,19 +71,36 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string',
             'description'  => 'required|string',
-            'image'  => 'required|string'
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+
         ]);
 
         $product = Product::findOrFail($id);
         $product->name = $request->input('name');
         $product->description = $request->input('description');
-        $product->image = $request->input('image');
+
+        if ($request->hasFile('image')) {
+
+        // hapus file lama jika ada
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        // upload gambar baru
+        $path = $request->file('image')->store('products', 'public');
+        $product->image = $path;
+        }
+
         $product->update();
 
         return redirect('/')->with('success', 'Produk berhasil diedit.');
     }
     function delete(Request $request, $id) {
         $product = Product::findOrFail($id);
+        
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+        Storage::disk('public')->delete($product->image);
+        }
         $product->delete();
 
         return redirect('/')->with('success', 'Produk berhasil dihapus.');

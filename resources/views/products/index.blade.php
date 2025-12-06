@@ -34,7 +34,7 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->description}}</td>
                     <td>
-                        <img src="{{$item->image}}" class="img-responsive" width="100" height="100" />
+                        <img src="{{ asset('storage/' . $item->image) }}" width="120">
                     </td>
                     <td>
                         <div class="d-flex align-content-between justify-content-between ">

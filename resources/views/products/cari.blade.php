@@ -49,7 +49,7 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>
-                        <img src="{{ $product->image }}" width="100" height="100">
+                        <img src="{{ asset('storage/' . $product->image) }}" width="120">
                     </td>
                     <td>
                         <div class="d-flex justify-content-between">

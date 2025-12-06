@@ -4,7 +4,7 @@
 <section class="row">
     <div class="container">
         <h4>Tambah Produk</h4>
-        <form action="{{route('product.save')}}" method="POST" accept-charset="utf-8" class="justify-content-center">
+        <form action="{{route('product.save')}}" method="POST" accept-charset="utf-8" enctype="multipart/form-data" class="justify-content-center">
             @csrf
             <div class="form-group">
                 <label for="name">Nama Produk</label>
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label for="desc">Image Produk</label>
-                <input name="image" type="text" class="form-control" id="desc" aria-describedby="fet2" placeholder="">
+                <input name="image" type="file" class="form-control" id="desc" aria-describedby="fet2" placeholder="">
                 <span id="fet2" class="sr-only">Masukan keterangan produk yang dijual</span>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>

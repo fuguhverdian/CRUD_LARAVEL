@@ -4,7 +4,7 @@
 <section class="row">
     <div class="container">
         <h4>Edit Produk</h4>
-        <form action="{{route('product.update', $product->id)}}" method="POST" accept-charset="utf-8" class="justify-content-center">
+        <form action="{{route('product.update', $product->id)}}" method="POST" accept-charset="utf-8" class="justify-content-center" enctype= "multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="title">Nama Produk</label>
@@ -19,9 +19,9 @@
             <div class="form-group">
                 <div class="d-flex">
                     <label for="image">Image Produk</label>
-                    <img src="{{$product->image}}" class="img-thumbnail" width="200" />
+                    <img src="{{ asset('storage/' . $product->image) }}" width="120">
                 </div>
-                <input name="image" type="text" class="form-control" id="image" aria-describedby="fet2" placeholder="">
+                <input name="image" type="file" class="form-control" id="image" aria-describedby="fet2" placeholder="">
                 <span id="fet2" class="sr-only">Masukan keterangan produk yang dijual</span>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
